@@ -1,3 +1,6 @@
+import { videoDetail } from "./controllers/videoControllers";
+import { videos } from "./db";
+
 // GLOBAL
 const HOME = "/";
 const JOIN = "/join";
@@ -9,15 +12,18 @@ const LOGOUT = "/logout";
 // USERS
 const USERS = "/users";
 const USER_DETAIL = "/:id";
-const USER_PROFILE = "/edit-profile";
+const Edit_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
+
+
 
 //videos
 const VIDEOS = "/videos";
-const UPLOAD = "/upload"
-const VIDEO_DETAIL = ":id";
-const EDIT_VIDEO = "/:id/edit";
+const UPLOAD = "/upload";
+const VIDEO_DETAIL = "/:id";
+const EDIT_VIDEO = "/:id/edit"
 const DELETE_VIDEO = "/:id/delete";
+
 
 const routes = {
     home:HOME,
@@ -27,15 +33,39 @@ const routes = {
     logout:LOGOUT,
     
     users : USERS,
-    userDetail:USER_DETAIL,
-    userProfile:USER_PROFILE,
+    userDetail:id =>{
+        if(id){
+            return `/users/${id}`;
+        }else{
+            return USER_DETAIL;
+        }
+    },
+    editProfile:Edit_PROFILE,
     changePassword:CHANGE_PASSWORD,
 
     videos:VIDEOS,
     upload:UPLOAD,
-    videoDetail:VIDEO_DETAIL,
-    editVideo:EDIT_VIDEO,
-    deleteVideo:DELETE_VIDEO
+    videoDetail: (id) =>{
+        if(id){
+            return`/videos/${id}`;
+        }else{
+            return VIDEO_DETAIL;
+        }
+    },
+    editVideo:(id) =>{
+        if(id){
+            return `/videos/${id}/edit`;
+        }else{
+            return EDIT_VIDEO;
+        }
+    },
+    deleteVideo:(id) =>{
+        if(id){
+            return `/videos/${id}/delete`;
+        }else{
+            return DELETE_VIDEO;
+        }
+    }
 };
 
 export default routes;
